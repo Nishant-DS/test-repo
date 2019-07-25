@@ -1,0 +1,30 @@
+{
+	"name": "fifadata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "DIM_CLUB_key",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CLUB",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEAGUE",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[DIM_CLUB]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
