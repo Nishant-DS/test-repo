@@ -5,8 +5,7 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=False;data source=IN-PRATEEKKEMKA;initial catalog=\"Fifa 19\";user id=sa",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwYjczODQ1ZC1hMDNmLTQ5NjEtOTI5NS01MzFlM2NiM2NiMjIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": ""
 		},
 		"connectVia": {
 			"referenceName": "on-prem",
