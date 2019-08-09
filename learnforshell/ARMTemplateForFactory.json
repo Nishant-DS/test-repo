@@ -45,10 +45,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -138,10 +138,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -231,10 +231,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -324,10 +324,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -417,10 +417,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -510,10 +510,196 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "DIM_CLUB_key",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "DIM_CLUB_key",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CLUB",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLUB",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LEAGUE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LEAGUE",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "fifadata",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/fifadata')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline15')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "source",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "DIM_CLUB_key",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "DIM_CLUB_key",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CLUB",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLUB",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LEAGUE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LEAGUE",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "fifadata",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/fifadata')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline16')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "source",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -603,10 +789,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -696,10 +882,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -789,10 +975,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -882,10 +1068,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -975,10 +1161,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -1068,10 +1254,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -1161,10 +1347,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -1286,6 +1472,33 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "learnforshell"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/fifadata')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1362,7 +1575,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline15')]",
+			"name": "[concat(parameters('factoryName'), '/pipeline17')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1386,10 +1599,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -1455,7 +1668,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline16')]",
+			"name": "[concat(parameters('factoryName'), '/pipeline18')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1479,10 +1692,10 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSetting"
+									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSetting",
+									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
 									"fileExtension": ".csv"
 								}
@@ -1548,7 +1761,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText4')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1561,6 +1774,37 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"fileName": "dim club.csv",
+						"folderPath": "test",
+						"container": "learnforshell"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "dim club.csv",
+						"folderPath": "test",
 						"container": "learnforshell"
 					},
 					"columnDelimiter": ",",
